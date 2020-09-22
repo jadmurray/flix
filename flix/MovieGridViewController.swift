@@ -78,5 +78,15 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         return UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPath(for: cell)!
+        let movie = movies[indexPath.row]
+        let gridViewController = segue.destination as! GridViewController
+        gridViewController.movie = movie
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
  
 }
